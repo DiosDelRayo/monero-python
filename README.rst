@@ -18,6 +18,8 @@ Python Monero module
    Otherwise you're safe. Standard wallet operations like receiving payments, spending, address
    generation etc. are NOT AFFECTED.
 
+.. _`Todo`: https://github.com/DiosDelRayo/monero-python/Todo.md
+
 A comprehensive Python module for handling Monero cryptocurrency.
 
 * release 1.1.1
