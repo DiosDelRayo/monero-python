@@ -14,3 +14,7 @@ venv
 build/
 dist/
 *.egg-info/
+bin/
+lib
+lib64
+pyvenv.cfg

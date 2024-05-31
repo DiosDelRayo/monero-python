@@ -27,7 +27,7 @@ setup(
     name="monero",
     version=version,
     description="A comprehensive Python module for handling Monero cryptocurrency",
-    url="https://github.com/monero-ecosystem/monero-python/",
+    url="https://github.com/DiosDelRayo/monero-python/",
     long_description=open("README.rst", "rb").read().decode("utf-8"),
     install_requires=open("requirements.txt", "r").read().splitlines(),
     tests_require=open("test_requirements.txt", "r").read().splitlines(),
