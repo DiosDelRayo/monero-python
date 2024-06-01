@@ -71,7 +71,7 @@ class Wordlist(metaclass=WordlistType):
         return out
 
     @classmethod
-    def get_checksum(cls, phrase):
+    def get_checksum(cls, phrase: str) -> str:
         """Given a mnemonic word string, return a string of the computed checksum.
 
         :rtype: str
