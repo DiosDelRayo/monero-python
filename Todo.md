@@ -3,3 +3,11 @@
     - [ ] add `cn_slow_hash` implementation from `monero/src/crypto/slow-hash.c` from monero
     - [ ] add `sc_add` implementation from `monero/src/crypto/crypto-ops.c` from monero
     - [ ] add `sc_sub` implementation from `monero/src/crypto/crypto-ops.c` from monero
+- [ ] strip not needed functionality
+- [ ] remove dependencies where possible
+    - [?] pynacl~=1.4, assume is needed to sign
+    - [?] pysocks~=1.7, assume is not needed how we are offline and airgapped
+    - [?] requests, assume we don't need it as long we don't need any daemon/rpc on device
+    - [?] ipaddress
+    - [?] varint, think this was needed but double check
+    - [?] pycryptodomex~=3.14, pretty sure it get's used, but maybe fork pycryptodomex and shake it down to what we really need
