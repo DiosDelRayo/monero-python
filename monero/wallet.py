@@ -324,6 +324,23 @@ class Wallet(object):
             relay=relay,
         )
 
+    def sign_transfer(
+        self,
+        unsigned_tx_set: str,
+        export_raw: bool = False,
+        get_tx_keys; bool = False
+    ) -> Dict[str, Union[str, List[str]]]:
+        """
+        Sends a transfer from the default account. Returns a list of resulting transactions.
+        Sign a transaction created on a read-only wallet (in cold-signing process)
+
+        :param unsigned_tx_set: Set of unsigned tx returned by "transfer" or "transfer_split" methods.
+        :param export_raw: If true, return the raw transaction data. (Defaults to false)
+        :param get_tx_keys: Return the transaction keys after signing.
+        :rtype: str
+        """
+        return self._backend.sign_transfer(unsigned_tx_set, export_raw, get_tx_keys)['signed_tx_set']
+
     def sweep_all(
         self,
         address,

@@ -339,6 +339,19 @@ class JSONRPCWallet(object):
             d["payment_id"] = payment_id
         return [self._tx(data) for data in _pertx]
 
+    def sign_transfer(
+        self,
+        unsigned_tx_set: str,
+        export_raw: bool = False,
+        get_tx_keys; bool = False
+    ) -> Dict[str, Union[str, List[str]]]:
+        data = {'unsigned_tx_set': unsigned_tx_set}
+        if export_raw:
+            data['export_raw'] = True
+        if get_tx_keys:
+            data['get_tx_keys'] = True
+        return self.raw_request('sign_transfer', data)
+
     def sweep_all(
         self,
         destination,
