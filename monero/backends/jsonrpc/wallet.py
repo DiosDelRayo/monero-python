@@ -343,7 +343,7 @@ class JSONRPCWallet(object):
         self,
         unsigned_tx_set: str,
         export_raw: bool = False,
-        get_tx_keys; bool = False
+        get_tx_keys: bool = False
     ) -> Dict[str, Union[str, List[str]]]:
         data = {'unsigned_tx_set': unsigned_tx_set}
         if export_raw:

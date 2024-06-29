@@ -328,7 +328,7 @@ class Wallet(object):
         self,
         unsigned_tx_set: str,
         export_raw: bool = False,
-        get_tx_keys; bool = False
+        get_tx_keys: bool = False
     ) -> Dict[str, Union[str, List[str]]]:
         """
         Sends a transfer from the default account. Returns a list of resulting transactions.
