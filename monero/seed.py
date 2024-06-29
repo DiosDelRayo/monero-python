@@ -92,7 +92,7 @@ class Seed(object):
                     "Not valid mnemonic phrase or hex: {arg}".format(arg=phrase_or_hex)
                 )
         else:
-            self.hex = generate_random_hex()
+            self.hex = generate_random_hex()  # TODO: 2024-06-29, this leads to seed phrases which will change when you import to a monero-wallet-* and then get the seed of that wallet, seems it has something to do with ed25519.scalar_reduce. Need to solve that later, I'm already delayed as fuck with other things.
             self._encode_seed()
 
     def is_mymonero(self):
