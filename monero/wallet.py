@@ -9,6 +9,7 @@ from . import ed25519
 from . import numbers
 from .transaction import Payment, PaymentManager
 from .keccak import keccak_256
+from typing import Dict, Union, List
 
 
 class Wallet(object):
