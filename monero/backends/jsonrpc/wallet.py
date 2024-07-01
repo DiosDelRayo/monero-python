@@ -1,9 +1,10 @@
-import binascii
+from binascii import unhexlify
 from datetime import datetime
 import json
 import logging
 import operator
 import requests
+from typing import Dict, Union, List
 
 from ... import exceptions
 from ...account import Account
@@ -261,7 +262,7 @@ class JSONRPCWallet(object):
                 "timestamp": datetime.fromtimestamp(data["timestamp"])
                 if "timestamp" in data
                 else None,
-                "blob": binascii.unhexlify(data.get("blob", "")),
+                "blob": unhexlify(data.get("blob", "")),
                 "confirmations": data.get("confirmations", None),
             }
         )
