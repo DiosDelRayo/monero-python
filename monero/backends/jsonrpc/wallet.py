@@ -278,6 +278,10 @@ class JSONRPCWallet(object):
     def export_key_images(self):
         return self.raw_request("export_key_images")["signed_key_images"]
 
+    def export_key_images_as_blob(self):
+        signed_key_images = self.export_key_images()
+        raise Exception('Not yet implemented')
+
     def import_key_images(self, key_images):
         _data = self.raw_request("import_key_images", {"signed_key_images": key_images})
         return (
