@@ -19,3 +19,17 @@
     - [?] ipaddress
     - [?] varint, think this was needed but double check
     - [?] pycryptodomex~=3.14, pretty sure it get's used, but maybe fork pycryptodomex and shake it down to what we really need
+
+
+For posponing reasons links to code in monero related to encrypt and cn_slow_hash:
+- wallet/wallet2.cpp +14657
+- wallet/wallet2.cpp +14699
+- crypto/chacha.h +73
+- crypto/chacha.h +91
+- crypto/hash.h +73
+- crypto/slow-hash.c +874
+- crypto/slow-hash.c +1571
+- crypto/slow-hash.c +1776
+
+Don't know if this is helpful, but doesn't seem like that:
+- https://www.cs.cmu.edu/~dga/crypto/xmr/cryptonight.png
