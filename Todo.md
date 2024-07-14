@@ -1,4 +1,12 @@
 # Todo
+- [ ] export key images as blob
+    - [ ] convert json to binary
+    - [ ] encrypt
+        - [x] chacha20 -> CryptoDome
+        - [x] cn_fast_hash
+            - [x] keccak_256
+        - [x] ed25519
+        - [ ] cn_slow_hash
 - [ ] encrypt/decrypt seed phrase, or probably more key, check in `monero/src/cryptonote_basic/cryptonote_format_utils.cpp` from monero
     - [ ] add `cn_slow_hash` implementation from `monero/src/crypto/slow-hash.c` from monero
     - [ ] add `sc_add` implementation from `monero/src/crypto/crypto-ops.c` from monero
