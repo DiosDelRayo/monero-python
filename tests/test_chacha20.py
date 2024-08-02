@@ -12,10 +12,8 @@ class TestEncryptionDecryption(unittest.TestCase):
             plaintext_bytes = plaintext.encode('utf-8')
         else:
             plaintext_bytes = plaintext
-        
         encrypted = encrypt(plaintext, self.skey, authenticated, kdf_rounds)
         decrypted = decrypt(encrypted, self.skey, authenticated, kdf_rounds)
-        
         self.assertEqual(plaintext_bytes, decrypted)
 
     def test_basic_encryption_decryption(self):

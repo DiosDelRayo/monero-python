@@ -5,4 +5,4 @@ version:
 
 sha256-github: version
 	@echo -n 'sha256:  '
-	@curl -s https://github.com/DiosDelRayo/monero-python/archive/refs/tags/v$(VERSION).tar.gz | sha256sum | awk '{print $$1}'
+	@curl -L -s https://github.com/DiosDelRayo/monero-python/archive/refs/tags/v$(VERSION).tar.gz | sha256sum | awk '{print $$1}'

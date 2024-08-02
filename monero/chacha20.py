@@ -26,7 +26,6 @@ def generate_chacha_key(skey: bytes, kdf_rounds: int) -> bytes:
         raise ValueError("Secret key must be 32 bytes")
     if not isinstance(kdf_rounds, int) or kdf_rounds < 1:
         raise ValueError("KDF rounds must be a positive integer")
-    
     key = skey
     for _ in range(kdf_rounds):
         key = keccak_256(key).digest()
@@ -36,31 +35,24 @@ def encrypt(plaintext: Union[bytes, str], skey: bytes, authenticated: bool = Fal
     try:
         if isinstance(plaintext, str):
             plaintext = plaintext.encode()
-        elif not isinstance(plaintext, bytes):
+        if not isinstance(plaintext, bytes):
             raise TypeError("Plaintext must be bytes or str")
-        
         if not isinstance(skey, bytes) or len(skey) != 32:
             raise ValueError("Secret key must be 32 bytes")
-        
         if not isinstance(authenticated, bool):
             raise TypeError("Authenticated must be a boolean")
-        
         if not isinstance(kdf_rounds, int) or kdf_rounds < 1:
             raise ValueError("KDF rounds must be a positive integer")
-
         key = generate_chacha_key(skey, kdf_rounds)
         iv = generate_chacha_random_iv()
         cipher = ChaCha20.new(key=key, nonce=iv)
         ciphertext = iv + cipher.encrypt(plaintext)
-
         if authenticated:
             hash_obj = keccak_256(ciphertext)
             public_key, _ = crypto_sign_keypair(skey)
             signature = crypto_sign(hash_obj.digest(), skey)[:64]
             ciphertext += signature
-
         return ciphertext
-
     except (ValueError, TypeError) as e:
         raise EncryptionError(f"Input validation error: {str(e)}")
     except Exception as e:
@@ -70,16 +62,12 @@ def decrypt(ciphertext: bytes, skey: bytes, authenticated: bool = False, kdf_rou
     try:
         if not isinstance(ciphertext, bytes):
             raise TypeError("Ciphertext must be bytes")
-        
         if not isinstance(skey, bytes) or len(skey) != 32:
             raise ValueError("Secret key must be 32 bytes")
-        
         if not isinstance(authenticated, bool):
             raise TypeError("Authenticated must be a boolean")
-        
         if not isinstance(kdf_rounds, int) or kdf_rounds < 1:
             raise ValueError("KDF rounds must be a positive integer")
-
         if authenticated:
             if len(ciphertext) < (CHACHA_IV_SIZE + 64):  # (iv) + 64 (signature) minimum
                 raise ValueError("Ciphertext too short for authenticated mode")
@@ -91,19 +79,14 @@ def decrypt(ciphertext: bytes, skey: bytes, authenticated: bool = False, kdf_rou
                 crypto_sign_open(signature + hash_obj.digest(), public_key)
             except CryptoError:
                 raise CryptoError("Signature verification failed")
-
         if len(ciphertext) < (CHACHA_IV_SIZE + 1):  # (iv) + 1 (minimum encrypted data) minimum
             raise ValueError("Ciphertext too short")
-
         iv = ciphertext[:CHACHA_IV_SIZE]
         encrypted_data = ciphertext[CHACHA_IV_SIZE:]
-
         key = generate_chacha_key(skey, kdf_rounds)
         cipher = ChaCha20.new(key=key, nonce=iv)
         plaintext = cipher.decrypt(encrypted_data)
-
         return plaintext
-
     except (ValueError, TypeError) as e:
         raise CryptoError(f"Decryption error: {str(e)}")
     except Exception as e:
